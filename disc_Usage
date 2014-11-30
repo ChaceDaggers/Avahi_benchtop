@@ -1,0 +1,13 @@
+from subprocess import Popen, PIPE
+import re
+
+def     disc_space(pattern = "2[0-9]%", message = "CAPACITY WARNING:"):
+        #takes shell command output
+        ps = Popen("df -h", shell True, stdout = PIPE, stderr = PIPE)
+        output_lines = ps.stdout.readlines()
+        for line in output_lines:
+            line = line.strip()
+            if re.search(pattern,line):
+               print "%S %S"  % (message,line)
+disc_space()
+               
